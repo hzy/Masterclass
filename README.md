@@ -26,9 +26,29 @@ hzy 为 yx 准备的“私房课”。
   * 理解 ReAct 模式（Reasoning + Acting）的基础。
   * **重点**: 连接外部世界，赋予 AI 行动能力。
 
-### 1. 进阶篇 (Advanced) - *Coming Soon*
+### 1. 进阶篇 (Advanced)
 
-*(待补充：RAG、Agent 框架、多模态等内容)*
+这一部分探讨如何将模型封装为符合生产标准的 API。
+
+* **[1/OpenAI - OpenAI Compatible API](./1/OpenAI/)**
+  * 将模型封装为符合 OpenAI 规范的 HTTP 接口。
+  * 手写 Pydantic Schema 理解 `v1/chat/completions` 协议细节。
+  * 实现流式输出 (SSE) 与工具调用 (Tool Calling) 的分片传输。
+  * **重点**: 让你的模型直接接入 LangChain、OpenWebUI 等生态。
+
+* **[1/VercelAISDK - AI SDK Core Agent](./1/VercelAISDK/)**
+  * 使用 Vercel AI SDK Core (`ai`) 构建极简 Agent。
+  * 体验 `ToolLoopAgent` 自动处理工具调用的循环。
+  * 使用 Zod 定义工具输入 Schema，无需手动解析 JSON。
+  * **重点**: 掌握高层抽象 SDK 如何简化 Agent 开发。
+
+* **[1/VercelAIElements - AI SDK UI Components](./1/VercelAIElements/)**
+  * 使用 Vercel AI SDK UI (`@ai-sdk/react`) 构建现代 Chat 界面。
+  * 配合 [AI Elements](https://elements.ai-sdk.dev/) 组件库快速搭建美观 UI。
+  * 理解 `useChat` Hook 如何管理消息状态、流式响应与重试机制。
+  * **重点**: 前后端数据流打通，实现类 ChatGPT 的流畅交互体验。
+
+*(待补充：MCP、RAG、Agent 框架、多模态等内容)*
 
 ## 环境准备
 

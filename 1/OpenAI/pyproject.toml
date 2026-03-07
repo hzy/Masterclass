@@ -1,0 +1,16 @@
+[project]
+name = "openai_compatible"
+version = "0.1.0"
+description = "A minimal implementation of OpenAI-compatible API with tool calling."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+    "pydantic>=2.5.0",
+    "openai>=1.10.0",
+    "sse-starlette>=2.0.0",
+    "torch>=2.2.0",
+    "transformers>=4.38.0",
+    "accelerate>=0.27.0"
+]

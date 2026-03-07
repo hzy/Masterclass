@@ -59,3 +59,5 @@ venv.bak/
 
 # ruff
 .ruff_cache/
+
+node_modules/
