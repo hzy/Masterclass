@@ -86,8 +86,29 @@ text = tokenizer.apply_chat_template(
 
 ## 延伸思考
 
-- **多步调用**: 如果用户问 "北京和伦敦的天气哪个更好？"，模型需要调用两次 `get_weather` 吗？
-- **错误处理**: 如果模型生成的 JSON 格式错误怎么办？
-- **安全性**: 允许模型执行任意代码（如 `os.system`）是非常危险的，如何限制？
+### 1. 揭秘 `apply_chat_template` 底层逻辑
+
+当我们调用 `tokenizer.apply_chat_template(..., tools=tools_definition)` 时，它不仅仅是拼接字符串，更是做了一次**翻译**工作。
+
+不同的模型（如 Llama 3, Mistral, Qwen）对工具的定义格式要求完全不同：
+
+- 有的模型要求把工具定义写在 System Prompt 里，用 JSON 格式。
+- 有的模型要求用特定的 XML 标签包裹。
+- 有的模型有专门的 token 来标识工具定义的开始和结束。
+
+`apply_chat_template` 会读取模型配置文件中的 `chat_template` 字段（通常是一段 Jinja2 模板代码），自动把我们传入的通用 JSON Schema 转换成该模型能理解的特定格式。这极大地简化了 Prompt Engineering 的难度。
+
+### 2. 多步调用 (Multi-turn Reasoning)
+
+如果用户问 "北京和伦敦的天气哪个更好？"，现在的简单循环可能不够用。更高级的 Agent 应该能：
+
+1. 先调用 `get_weather("Beijing")`。
+2. 获取结果后，自主决定再调用 `get_weather("London")`。
+3. 拿到两份数据后，进行对比，最后生成回答。
+
+### 3. 容错与安全
+
+- **JSON 错误**: 模型生成的 JSON 可能少个括号或引号。生产环境通常需要引入重试机制或使用更鲁棒的解析器（如 `json_repair`）。
+- **权限控制**: 永远不要让模型直接执行 `os.system` 或 `exec`。工具函数应该是沙箱化的、权限受限的原子操作。
 
 这个简单的例子展示了 ReAct (Reasoning + Acting) 循环中最基础的一环。
