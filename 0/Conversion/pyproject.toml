@@ -1,0 +1,13 @@
+[project]
+name = "gpt2-conversion"
+version = "0.1.0"
+description = "A simple conversational GPT-2 example."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch",
+    "transformers",
+]
+
+[tool.uv]
+package = false
