@@ -60,3 +60,16 @@
 3. **接口桥接 (Bridging)**:
     这种一致性使得“接口适配器”成为可能。你可以编写中间件，将一种格式转化为另一种。
     * *例如*：你可以把 **GPT-5.3-Codex** 这样的模型，通过适配层“伪装”成 Claude 的接口格式；或者把 Google 的 Gemini 包装成 OpenAI 兼容接口（如本项目所做），从而让同一套客户端代码无缝切换底层模型。
+
+4. **工业级实现 (Industrial Implementation)**:
+    想要了解生产环境中的 `/chat/completions` 接口是如何实现的吗？推荐阅读 **[vLLM](https://github.com/vllm-project/vllm)** 的源码。
+    *   **入口**: [`vllm/entrypoints/openai/api_server.py`](https://github.com/vllm-project/vllm/blob/main/vllm/entrypoints/openai/api_server.py)
+    *   **核心逻辑**: [`vllm/entrypoints/openai/serving_chat.py`](https://github.com/vllm-project/vllm/blob/main/vllm/entrypoints/openai/serving_chat.py)
+
+    vLLM 是目前最流行的开源推理框架之一。不同于本项目的极简实现，它在服务端处理了 **Continuous Batching** (连续批处理)、**PagedAttention** (分页注意力)、**Distributed Inference** (分布式推理) 等复杂问题，以实现极高的吞吐量和低延迟。但你会发现，其顶层的接口定义与协议处理逻辑，与本项目是高度一致的。
+
+5. **端侧实现 (On-Device Implementation)**:
+    如果你对在 CPU 或移动设备上运行感兴趣，**[llama.cpp](https://github.com/ggerganov/llama.cpp)** 是必读的经典。
+    *   **核心逻辑**: [`examples/server/server.cpp`](https://github.com/ggerganov/llama.cpp/blob/master/examples/server/server.cpp)
+    
+    llama.cpp 展示了如何用 C++ 从零构建一个高性能的 OpenAI 兼容服务器。通过 **GGUF 量化** 技术，它能让庞大的 LLM 在消费级 CPU 甚至手机上流畅运行。这里的实现更加底层，让你看到即使是不同编程语言，对于 `chat/completions` 协议的实现也是殊途同归的。
