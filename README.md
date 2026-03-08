@@ -26,6 +26,12 @@ hzy 为 yx 准备的“私房课”。
   * 理解 ReAct 模式（Reasoning + Acting）的基础。
   * **重点**: 连接外部世界，赋予 AI 行动能力。
 
+* **[0/Compact - 上下文压缩](./0/Compact/)**
+  * 使用 MLX 在 Apple Silicon 上运行长上下文 Qwen 对话。
+  * 将整本《Alice's Adventures in Wonderland》注入 System Prompt，体验超长上下文。
+  * 实现手动与自动 Context Compaction（上下文压缩）。
+  * **重点**: 学会在有限上下文窗口内保留长期记忆。
+
 ### 1. 进阶篇 (Advanced)
 
 这一部分探讨如何将模型封装为符合生产标准的 API。

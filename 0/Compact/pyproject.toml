@@ -1,0 +1,10 @@
+[project]
+name = "compact"
+version = "0.1.0"
+description = "A tutorial on context compaction with Alice in Wonderland roleplay using MLX"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mlx-lm>=0.21.1",
+    "transformers>=4.48.0",
+]

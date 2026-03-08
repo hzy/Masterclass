@@ -8,6 +8,10 @@ print(f"正在加载 {model_name}，调用 Apple Silicon MPS 硬件加速...")
 
 # 关键：device_map="mps" 启用 Mac GPU 加速，torch_dtype=torch.float16 节省内存
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+# 补丁：解决 pad_token 可能未定义导致 attention_mask 警告的问题
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+
 model = AutoModelForCausalLM.from_pretrained(
     model_name, device_map="mps", torch_dtype=torch.float16
 )
