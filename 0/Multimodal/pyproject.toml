@@ -1,0 +1,18 @@
+[project]
+name = "multimodal-demo"
+version = "0.1.0"
+description = "Demonstrate multimodal input handling and ChatML formatting with Qwen2.5-VL"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "torchvision",
+    "transformers>=4.49.0", 
+    "qwen-vl-utils",
+    "pillow",
+    "requests",
+    "accelerate"
+]
+
+[tool.uv]
+package = false
