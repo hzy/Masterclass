@@ -62,7 +62,7 @@ flowchart LR
 
     Model -->|增量 token / tool call 意图| Engine
     Engine -->|OpenAI delta| API
-    API -->|SSE: data: {...}| Agent
+    API -->|SSE stream chunks| Agent
     Agent -->|最终回复| User
 
     Agent -->|执行函数调用| Tools
