@@ -54,20 +54,20 @@ flowchart LR
 
     Tools[(External Tools)]
 
-    User -->|问题/指令| Agent
+    User -->|Question or instruction| Agent
     Agent -->|POST /v1/chat/completions| API
-    API -->|请求校验| Protocol
-    Protocol -->|标准化请求| Engine
-    Engine -->|Chat Template + 生成| Model
+    API -->|Validate request| Protocol
+    Protocol -->|Normalized request| Engine
+    Engine -->|Chat template + generation| Model
 
-    Model -->|增量 token / tool call 意图| Engine
+    Model -->|Delta token or tool-call intent| Engine
     Engine -->|OpenAI delta| API
     API -->|SSE stream chunks| Agent
-    Agent -->|最终回复| User
+    Agent -->|Final answer| User
 
-    Agent -->|执行函数调用| Tools
-    Tools -->|工具结果| Agent
-    Agent -->|带 tool role 消息继续请求| API
+    Agent -->|Execute function call| Tools
+    Tools -->|Tool result| Agent
+    Agent -->|Follow-up request with tool role message| API
 ```
 
 这个图对应了本章节的核心思想：
