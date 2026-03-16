@@ -36,6 +36,44 @@
 * **server.py**: FastAPI 服务，负责将 `engine` 的输出封装为 OpenAI SSE 格式 (`data: {...}`).
 * **protocol.py**: 定义了 Pydantic Schema，确保 JSON 结构完全兼容。
 
+## 数据流图（Server / Client）
+
+```mermaid
+flowchart LR
+    subgraph Client[Client]
+        User[User]
+        Agent[Agent / client.py]
+    end
+
+    subgraph Server[Server]
+        API[API Layer\nserver.py]
+        Protocol[Protocol Schema\nprotocol.py]
+        Engine[Inference Engine\nengine.py]
+        Model[(Qwen2.5-3B-Instruct)]
+    end
+
+    Tools[(External Tools)]
+
+    User -->|问题/指令| Agent
+    Agent -->|POST /v1/chat/completions| API
+    API -->|请求校验| Protocol
+    Protocol -->|标准化请求| Engine
+    Engine -->|Chat Template + 生成| Model
+
+    Model -->|增量 token / tool call 意图| Engine
+    Engine -->|OpenAI delta| API
+    API -->|SSE: data: {...}| Agent
+    Agent -->|最终回复| User
+
+    Agent -->|执行函数调用| Tools
+    Tools -->|工具结果| Agent
+    Agent -->|带 tool role 消息继续请求| API
+```
+
+这个图对应了本章节的核心思想：
+- **Server** 负责协议兼容（OpenAI 接口）、请求校验、模型推理与流式分片。
+- **Client/Agent** 负责消费 SSE、执行工具、拼接工具结果后继续对话。
+
 ## 观察重点
 
 当你运行 `client.py` 询问天气时：
