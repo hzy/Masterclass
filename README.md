@@ -32,9 +32,9 @@ hzy 为 yx 准备的“私房课”。
   * 实现手动与自动 Context Compaction（上下文压缩）。
   * **重点**: 学会在有限上下文窗口内保留长期记忆。
 
-### 1. 进阶篇 (Advanced)
+### 1. 工程篇 (Engineering)
 
-这一部分探讨如何将模型封装为符合生产标准的 API。
+这一部分探讨如何将模型封装为符合生产标准的 API，并在 Web、TUI 等真实交互场景中落地。
 
 * **[1/OpenAI - OpenAI Compatible API](./1/OpenAI/)**
   * 将模型封装为符合 OpenAI 规范的 HTTP 接口。
@@ -60,7 +60,21 @@ hzy 为 yx 准备的“私房课”。
   * 内置 `bash / read / write / edit` 工具，并支持审批流与安全拦截。
   * **重点**: 掌握 TUI 场景下的流式交互与工具调用可视化实践。
 
-*(待补充：MCP、RAG、Agent 框架、多模态等内容)*
+### 2. 协议与集成篇 (Protocols & Integrations)
+
+这一部分聚焦协议化能力与集成实践，当前以 MCP Server 为主，后续将扩展到更多协议与连接方式。
+
+* **[2/ToolkitMCPServer - Developer Toolkit MCP](./2/ToolkitMCPServer/)**
+  * 基于 `stdio + bun + @modelcontextprotocol/sdk` 的本地工具型 MCP Server。
+  * 提供 `read / write / edit / bash` 四个实用工具。
+  * 演示如何将工具注册逻辑模块化拆分（`tools/` + `lib/`）。
+  * **重点**: 搭建可复用的本地工程助手 MCP。
+
+* **[2/WeatherMCPServer - Weather MCP](./2/WeatherMCPServer/)**
+  * 单工具 `get_weather` 的最小天气服务示例。
+  * 包含 `inputSchema` 与 `outputSchema` 的完整定义。
+  * 展示文本输出与 `structuredContent` 双通道返回。
+  * **重点**: 用最小代码掌握 MCP Tool 的输入输出约定。
 
 ## 环境准备
 
