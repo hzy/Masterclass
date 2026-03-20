@@ -54,6 +54,12 @@ hzy 为 yx 准备的“私房课”。
   * 理解 `useChat` Hook 如何管理消息状态、流式响应与重试机制。
   * **重点**: 前后端数据流打通，实现类 ChatGPT 的流畅交互体验。
 
+* **[1/TUIAgent - Terminal Chat Agent](./1/TUIAgent/)**
+  * 使用 `Vercel AI SDK v6 + OpenTUI` 构建终端聊天 Agent。
+  * 按 `message.parts` 渲染 `text / reasoning / tool`，清晰展示推理与工具状态。
+  * 内置 `bash / read / write / edit` 工具，并支持审批流与安全拦截。
+  * **重点**: 掌握 TUI 场景下的流式交互与工具调用可视化实践。
+
 *(待补充：MCP、RAG、Agent 框架、多模态等内容)*
 
 ## 环境准备
