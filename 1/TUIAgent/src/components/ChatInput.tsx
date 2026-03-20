@@ -3,11 +3,12 @@ import type { InputRenderable } from "@opentui/core";
 
 type ChatInputProps = {
   onSend: (text: string) => void;
+  focused?: boolean;
 };
 
 const inputAccentColor = "#FFB454";
 
-export function ChatInput({ onSend }: ChatInputProps) {
+export function ChatInput({ onSend, focused = true }: ChatInputProps) {
   const inputRef = useRef<InputRenderable>(null);
 
   return (
@@ -27,7 +28,7 @@ export function ChatInput({ onSend }: ChatInputProps) {
       <input
         ref={inputRef}
         flexGrow={1}
-        focused
+        focused={focused}
         showCursor
         cursorStyle={{ style: "line", blinking: true }}
         cursorColor={inputAccentColor}

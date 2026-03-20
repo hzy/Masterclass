@@ -13,4 +13,6 @@ const openai = createOpenAI({
   // },
 });
 
-export { openai };
+const model = openai.chat("Qwen/Qwen2.5-3B-Instruct")
+
+export { model };

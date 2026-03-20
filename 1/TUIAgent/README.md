@@ -6,12 +6,13 @@
 
 1. **分角色排版**: `You / Assistant` 使用不同视觉样式，提升终端可读性。
 2. **Parts 细粒度渲染**: 按 `text / reasoning / tool` 分别渲染，避免信息混杂。
-3. **Tool 状态可视化**: 展示工具执行中、成功、失败、拒绝等状态。
+3. **Tool 状态可视化**: 展示工具执行中、审批中、成功、失败、拒绝等状态。
 4. **多层 Loading Indicators**:
    - 整体请求中：`Thinking...` spinner
    - Tool 执行中：Tool 卡片内 spinner + 高亮边框
    - 文本流式输出中：末尾 streaming cursor
 5. **输入体验优化**: 聚焦态高亮、可见光标、发送后自动清空。
+6. **内置工程工具集**: `bash / read / write / edit`，均支持审批流。
 
 ## 快速开始
 
@@ -53,6 +54,10 @@ bun run typecheck
 │     ├─ MessageItem.tsx
 │     ├─ Spinner.tsx
 │     └─ ToolCallPart.tsx
+├─ src/
+│  └─ tools/
+│     ├─ CreateBashTool.ts
+│     └─ CreateFileSystemTools.ts
 ├─ package.json
 └─ tsconfig.json
 ```
@@ -70,8 +75,25 @@ bun run typecheck
 - `text`: assistant 使用 `<markdown>` 流式渲染；user 使用纯文本。
 - `reasoning`: 使用低对比色单独展示，避免干扰主答复。
 - `tool`: 使用 `ToolCallPart` 卡片展示工具名、输入、输出与错误。
+- `approval-requested`: 展示独立审批区，可同意、拒绝、拒绝并补充要求。
 
-### 3) 组件拆分
+### 3) Bash Tool 设计
+
+- 工具名：`bash`
+- 输入参数：`command`、`description`、`timeoutMs`、`workdir`
+- 输出字段：`ok`、`exitCode`、`stdout`、`stderr`、`durationMs`、`timedOut`、`truncated`
+- 安全策略：
+  - 默认需要人工审批
+  - 拦截明显危险命令模式（如 `rm -rf /`、fork bomb 等）
+  - 长输出自动截断，避免刷屏
+
+### 4) FileSystem Tools 设计
+
+- `read`: 读取文件或目录，支持 `offset/limit` 分段读取
+- `write`: 写入完整文件内容，可自动创建父目录
+- `edit`: 仅支持 `oldString -> newString` 替换，且强制 `oldString` 在文件中 **唯一匹配**
+
+### 5) 组件拆分
 
 - `MessageItem.tsx`: 单条消息与 parts 渲染编排。
 - `ToolCallPart.tsx`: 工具调用卡片与状态图标。
