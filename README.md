@@ -64,17 +64,17 @@ hzy 为 yx 准备的“私房课”。
 
 这一部分聚焦协议化能力与集成实践，当前以 MCP Server 为主，后续将扩展到更多协议与连接方式。
 
-* **[2/ToolkitMCPServer - Developer Toolkit MCP](./2/ToolkitMCPServer/)**
-  * 基于 `stdio + bun + @modelcontextprotocol/sdk` 的本地工具型 MCP Server。
-  * 提供 `read / write / edit / bash` 四个实用工具。
-  * 演示如何将工具注册逻辑模块化拆分（`tools/` + `lib/`）。
-  * **重点**: 搭建可复用的本地工程助手 MCP。
-
 * **[2/WeatherMCPServer - Weather MCP](./2/WeatherMCPServer/)**
   * 单工具 `get_weather` 的最小天气服务示例。
   * 包含 `inputSchema` 与 `outputSchema` 的完整定义。
   * 展示文本输出与 `structuredContent` 双通道返回。
   * **重点**: 用最小代码掌握 MCP Tool 的输入输出约定。
+
+* **[2/ToolkitMCPServer - Developer Toolkit MCP](./2/ToolkitMCPServer/)**
+  * 基于 `stdio + bun + @modelcontextprotocol/sdk` 的本地工具型 MCP Server。
+  * 提供 `read / write / edit / bash` 四个实用工具。
+  * 演示如何将工具注册逻辑模块化拆分（`tools/` + `lib/`）。
+  * **重点**: 搭建可复用的本地工程助手 MCP。
 
 ## 环境准备
 
