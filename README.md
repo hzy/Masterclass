@@ -64,6 +64,11 @@ hzy 为 yx 准备的“私房课”。
 
 这一部分聚焦协议化能力与集成实践，当前以 MCP Server 为主，后续将扩展到更多协议与连接方式。
 
+* **[2/MCPInspector - MCP Inspector](./2/MCPInspector/)**
+  * 介绍 MCP (Model Context Protocol) 解决的 N × M 集成地狱痛点。
+  * 官方 MCP Inspector 测试客户端的使用演示与极简环境。
+  * **重点**: 了解 MCP 核心概念，并学会使用可视化工具调试和检查 MCP Server。
+
 * **[2/WeatherMCPServer - Weather MCP](./2/WeatherMCPServer/)**
   * 单工具 `get_weather` 的最小天气服务示例。
   * 包含 `inputSchema` 与 `outputSchema` 的完整定义。
