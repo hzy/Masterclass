@@ -1,0 +1,12 @@
+{
+  "name": "mcp-inspector",
+  "version": "1.0.0",
+  "description": "MCP Inspector tool",
+  "scripts": {
+    "inspect:weather": "npx @modelcontextprotocol/inspector bun run ../WeatherMCPServer/src/index.ts",
+    "inspect:toolkit": "npx @modelcontextprotocol/inspector bun run ../ToolkitMCPServer/src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/inspector": "latest"
+  }
+}
